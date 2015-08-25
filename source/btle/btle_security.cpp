@@ -22,11 +22,12 @@
 
 #include "device_manager.h"
 #include "btle_security.h"
-
+namespace BTLESecurity{
 static dm_application_instance_t applicationInstance;
 static ret_code_t dm_handler(dm_handle_t const *p_handle, dm_event_t const *p_event, ret_code_t event_result);
+}
 
-ble_error_t
+BTLEDeviceSecurity::ble_error_t
 btle_initializeSecurity(bool                                      enableBonding,
                         bool                                      requireMITM,
                         SecurityManager::SecurityIOCapabilities_t iocaps,
@@ -69,7 +70,7 @@ btle_initializeSecurity(bool                                      enableBonding,
     }
 
     const dm_application_param_t dm_param = {
-        .evt_handler  = dm_handler,
+        .evt_handler  = BTLESecurity::dm_handler,
         .service_type = DM_PROTOCOL_CNTXT_GATT_CLI_ID,
         .sec_param    = {
             .bond          = enableBonding,/**< Perform bonding. */
@@ -101,7 +102,7 @@ btle_initializeSecurity(bool                                      enableBonding,
     return BLE_ERROR_NONE;
 }
 
-ble_error_t
+BTLEDeviceSecurity::ble_error_t
 btle_purgeAllBondingState(void)
 {
     ret_code_t rc;
@@ -119,7 +120,7 @@ btle_purgeAllBondingState(void)
     }
 }
 
-ble_error_t
+BTLEDeviceSecurity::ble_error_t
 btle_getLinkSecurity(Gap::Handle_t connectionHandle, SecurityManager::LinkSecurityStatus_t *securityStatusP)
 {
     ret_code_t rc;
@@ -149,7 +150,7 @@ btle_getLinkSecurity(Gap::Handle_t connectionHandle, SecurityManager::LinkSecuri
 }
 
 ret_code_t
-dm_handler(dm_handle_t const *p_handle, dm_event_t const *p_event, ret_code_t event_result)
+BTLESecurity::dm_handler(dm_handle_t const *p_handle, dm_event_t const *p_event, ret_code_t event_result)
 {
     switch (p_event->event_id) {
         case DM_EVT_SECURITY_SETUP: /* started */ {
