@@ -30,6 +30,7 @@ static void   error_callback(uint32_t nrf_error);
     @returns
 */
 /**************************************************************************/
+namespace BTLEGap{
 error_t btle_gap_init(void)
 {
     ble_gap_conn_params_t gap_conn_params = {0};
@@ -74,6 +75,7 @@ error_t btle_gap_init(void)
 #endif // SDK_CONN_PARAMS_MODULE_ENABLE
 
     return ERROR_NONE;
+}
 }
 
 /**************************************************************************/
