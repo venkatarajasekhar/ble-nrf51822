@@ -53,11 +53,11 @@ error_t btle_gap_init(void)
      */
 #if SDK_CONN_PARAMS_MODULE_ENABLE
     /* Connection Parameters */
-    enum {
+    typedef enum {
         FIRST_UPDATE_DELAY = APP_TIMER_TICKS(5000, CFG_TIMER_PRESCALER),
         NEXT_UPDATE_DELAY  = APP_TIMER_TICKS(5000, CFG_TIMER_PRESCALER),
         MAX_UPDATE_COUNT   = 3
-    };
+    }EConnParam;
 
     ble_conn_params_init_t cp_init = {0};
 
