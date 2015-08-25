@@ -19,7 +19,7 @@
 
 #include "ble/Gap.h"
 #include "ble/SecurityManager.h"
-
+typedef namespace {
 /**
  * Enable Nordic's Device Manager, which brings in functionality from the
  * stack's Security Manager. The Security Manager implements the actual
@@ -61,5 +61,6 @@ ble_error_t btle_getLinkSecurity(Gap::Handle_t connectionHandle, SecurityManager
  *                                    application registration.
  */
 ble_error_t btle_purgeAllBondingState(void);
+}BTLEDeviceSecurity;
 
 #endif /* _BTLE_SECURITY_H_ */
